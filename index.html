@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoU-avdrag Portal — R&D Tax Relief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-mark">FoU</span>
+        <span class="logo-text">Avdrag Portal</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#overview" class="nav-link active">Overview</a>
+        <a href="#projects" class="nav-link">My Projects</a>
+        <a href="#calculator" class="nav-link">Calculator</a>
+        <a href="#templates" class="nav-link">Templates</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero" id="overview">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Lag (2023:747) om FoU-avdrag</div>
+      <h1 class="hero-title">Cut your employer<br/>contributions from<br/><span class="highlight">31.42% → 11.42%</span></h1>
+      <p class="hero-sub">For every qualifying R&D employee in Sweden, that's ~10 000 kr saved per person per month at a 60 000 kr salary.</p>
+      <div class="hero-stats">
+        <div class="stat-pill"><span class="stat-num">20%</span><span class="stat-label">deducted from arbetsgivaravgifter</span></div>
+        <div class="stat-pill"><span class="stat-num">3 MSEK</span><span class="stat-label">max deduction / month</span></div>
+        <div class="stat-pill"><span class="stat-num">≥50%</span><span class="stat-label">working time on R&D</span></div>
+      </div>
+    </div>
+    <div class="hero-law-ref">
+      <span class="law-icon">§</span>
+      <span>Law reference: <strong>Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter</strong> — "lag om FoU-avdrag". Exclusions defined in <strong>Prop. 2013/14:1 s.521–522</strong>.</span>
+    </div>
+  </section>
+
+  <!-- THREE GATES EXPLAINER -->
+  <section class="gates-section">
+    <div class="container">
+      <h2 class="section-title">The 3 qualifying gates <span class="subtle">(§3–5 lag om FoU-avdrag)</span></h2>
+      <p class="section-sub">A project must pass ALL three to qualify. Routine development, maintenance, and support are explicitly excluded.</p>
+      <div class="gates-grid">
+        <div class="gate-card">
+          <div class="gate-number">01</div>
+          <div class="gate-icon">🏢</div>
+          <h3>Commercial Purpose</h3>
+          <p>The R&D must be conducted in the course of a business activity (<em>näringsverksamhet</em>). Internal research for your own products or services counts.</p>
+        </div>
+        <div class="gate-card">
+          <div class="gate-number">02</div>
+          <div class="gate-icon">🔬</div>
+          <h3>Systematic &amp; Qualified</h3>
+          <p>Work must be systematic research or development using scientific methods. Ad-hoc bug fixing or routine iteration does <strong>not</strong> qualify.</p>
+        </div>
+        <div class="gate-card">
+          <div class="gate-number">03</div>
+          <div class="gate-icon">💡</div>
+          <h3>New Knowledge or Product</h3>
+          <p>Must create new knowledge, or a substantially new or improved product/process. The work must use research results as a <em>decisive foundation</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT UPLOAD / ASSESSMENT -->
+  <section class="projects-section" id="projects">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-title">Project Qualifier</h2>
+          <p class="section-sub">Add your projects and get an instant eligibility assessment.</p>
+        </div>
+        <button class="btn-primary" id="openAddProject">+ Add Project</button>
+      </div>
+
+      <!-- Project list -->
+      <div class="projects-list" id="projectsList">
+        <!-- Demo project -->
+        <div class="project-card" data-id="demo1">
+          <div class="project-card-header">
+            <div>
+              <span class="project-status qualified">● Likely qualifies</span>
+              <h3 class="project-name">AI Prediction Engine v2</h3>
+              <p class="project-desc">Building a novel ML model to predict customer churn using proprietary dataset.</p>
+            </div>
+            <div class="project-meta-right">
+              <div class="people-count">3 people</div>
+              <div class="monthly-saving">~30 000 kr/mo saved</div>
+            </div>
+          </div>
+          <div class="gate-checks">
+            <span class="check pass">✓ Commercial</span>
+            <span class="check pass">✓ Systematic</span>
+            <span class="check pass">✓ New knowledge</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-id="demo2">
+          <div class="project-card-header">
+            <div>
+              <span class="project-status maybe">⚠ Borderline</span>
+              <h3 class="project-name">Mobile App Redesign</h3>
+              <p class="project-desc">Redesigning UI/UX of existing customer-facing app. Some new features.</p>
+            </div>
+            <div class="project-meta-right">
+              <div class="people-count">2 people</div>
+              <div class="monthly-saving">Review needed</div>
+            </div>
+          </div>
+          <div class="gate-checks">
+            <span class="check pass">✓ Commercial</span>
+            <span class="check fail">✗ Systematic?</span>
+            <span class="check fail">✗ New knowledge?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD PROJECT MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Assess a New Project</h2>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Project name</label>
+          <input type="text" id="projName" placeholder="e.g. ML Forecasting Engine" />
+        </div>
+        <div class="form-group">
+          <label>Description <span class="hint">What does the project do?</span></label>
+          <textarea id="projDesc" rows="3" placeholder="Describe what the project builds or researches..."></textarea>
+        </div>
+        <div class="gate-questions">
+          <p class="gate-q-title">Three-gate check:</p>
+          <div class="gate-q">
+            <label class="gate-q-label">
+              <input type="checkbox" id="g1" />
+              <span>The project is conducted within a commercial business (<em>näringsverksamhet</em>)</span>
+            </label>
+          </div>
+          <div class="gate-q">
+            <label class="gate-q-label">
+              <input type="checkbox" id="g2" />
+              <span>The work is systematic R&D using scientific methods — not routine maintenance or iteration</span>
+            </label>
+          </div>
+          <div class="gate-q">
+            <label class="gate-q-label">
+              <input type="checkbox" id="g3" />
+              <span>The goal is to create new knowledge or a substantially new/improved product or process</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Number of qualifying people <span class="hint">(spending ≥50% time on this project)</span></label>
+          <input type="number" id="projPeople" min="0" value="1" />
+        </div>
+        <div class="form-group">
+          <label>Average monthly salary per person (kr)</label>
+          <input type="number" id="projSalary" min="0" value="60000" />
+        </div>
+        <div class="modal-result" id="modalResult"></div>
+        <button class="btn-primary full-width" id="assessProject">Assess &amp; Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <h2 class="section-title">Savings Calculator</h2>
+      <p class="section-sub">See your monthly and annual savings under Lag (2023:747).</p>
+      <div class="calc-grid">
+        <div class="calc-inputs">
+          <div class="calc-row">
+            <label>Number of qualifying employees / consultants</label>
+            <input type="number" id="calcPeople" value="3" min="0" />
+          </div>
+          <div class="calc-row">
+            <label>Average monthly salary (kr)</label>
+            <input type="number" id="calcSalary" value="60000" min="0" />
+          </div>
+          <div class="calc-row">
+            <label>% of time spent on R&D (≥50% required)</label>
+            <input type="number" id="calcPct" value="100" min="50" max="100" />
+          </div>
+          <button class="btn-primary" id="calcBtn">Calculate</button>
+        </div>
+        <div class="calc-results" id="calcResults">
+          <div class="result-row">
+            <span>Normal arbetsgivaravgifter</span>
+            <span class="result-val" id="rNormal">—</span>
+          </div>
+          <div class="result-row highlight-row">
+            <span>R&D deduction (20%)</span>
+            <span class="result-val green" id="rDeduction">—</span>
+          </div>
+          <div class="result-row">
+            <span>Effective contributions payable</span>
+            <span class="result-val blue" id="rEffective">—</span>
+          </div>
+          <div class="result-row big-row">
+            <span>Monthly saving</span>
+            <span class="result-val big green" id="rMonthlySave">—</span>
+          </div>
+          <div class="result-row big-row">
+            <span>Annual saving</span>
+            <span class="result-val big green" id="rAnnualSave">—</span>
+          </div>
+          <div class="calc-note" id="calcNote"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section class="templates-section" id="templates">
+    <div class="container">
+      <h2 class="section-title">Documentation Templates</h2>
+      <p class="section-sub">Skatteverket can audit any period. Download and fill in these templates to stay protected.</p>
+      <div class="templates-grid">
+
+        <div class="template-card">
+          <div class="template-icon">📋</div>
+          <div class="template-info">
+            <h3>Project Description Template</h3>
+            <p>Narrative template linking your project to the three qualifying criteria. Mirrors Skatteverket's expected format.</p>
+            <span class="template-tag">.txt</span>
+          </div>
+          <button class="btn-download" onclick="downloadTemplate('project-description')">↓ Download</button>
+        </div>
+
+        <div class="template-card">
+          <div class="template-icon">⏱️</div>
+          <div class="template-info">
+            <h3>Monthly Time Log — Per Person</h3>
+            <p>Track daily hours on R&D vs other activities. Required to prove ≥50% threshold (§5 lag om FoU-avdrag).</p>
+            <span class="template-tag">.txt</span>
+          </div>
+          <button class="btn-download" onclick="downloadTemplate('time-log')">↓ Download</button>
+        </div>
+
+        <div class="template-card">
+          <div class="template-icon">👥</div>
+          <div class="template-info">
+            <h3>Qualifying People Register</h3>
+            <p>Record of all employees and consultants (§6) claimed for deduction, with their monthly qualifying salary and role.</p>
+            <span class="template-tag">.txt</span>
+          </div>
+          <button class="btn-download" onclick="downloadTemplate('people-register')">↓ Download</button>
+        </div>
+
+        <div class="template-card">
+          <div class="template-icon">📊</div>
+          <div class="template-info">
+            <h3>AGI Monthly Claim Summary</h3>
+            <p>Summary sheet for each month's arbetsgivardeklaration entry. Note: unused deductions cannot be carried forward.</p>
+            <span class="template-tag">.txt</span>
+          </div>
+          <button class="btn-download" onclick="downloadTemplate('agi-summary')">↓ Download</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Based on <strong>Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter</strong> and <strong>Prop. 2013/14:1 s.521–522</strong>. This tool is for guidance only — consult a tax advisor for your specific situation.</p>
+      <p class="footer-small">FoU-avdrag Portal — Open source, host on GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
