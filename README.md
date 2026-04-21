@@ -1,54 +1,116 @@
 # FoU-avdrag Portal
 
-A static web portal to assess R&D projects for Swedish employer contribution deductions under **Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter** (the "lag om FoU-avdrag").
+A single-file web portal for assessing R&D projects against Swedish employer contribution deduction criteria under **Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter** — the "lag om FoU-avdrag".
 
-## What this does
+Cut employer social contributions from **31.42% → 11.42%** for qualifying R&D staff. That's roughly 10 000 kr saved per person per month at a 60 000 kr salary.
 
-- **Project Qualifier** — Run any project through the 3-gate assessment (commercial, systematic, new knowledge)
-- **Savings Calculator** — See monthly and annual savings vs the normal 31.42% arbetsgivaravgifter
-- **Documentation Templates** — Download audit-ready templates for Skatteverket
+---
+
+## What's in the portal
+
+### ✦ AI-powered project assessment
+Paste your project description and the portal analyses it against all three qualifying gates using Claude AI. It returns a detailed per-gate breakdown with specific quotes from your own text — explaining exactly why each gate passes or fails, and flagging any exclusion risks.
+
+### ☑ Three-gate qualifier
+Work through the three legal criteria manually after reading the AI analysis. You stay in control of the final decision.
+
+### 📂 Project list
+All assessed projects are collected in a portfolio view with gate checks, estimated monthly savings, and export options.
+
+### 💰 Savings calculator
+Enter headcount, salary, and R&D time percentage. The calculator applies the 20% deduction, checks the 3 MSEK monthly cap, and shows your monthly and annual saving.
+
+### ✅ Documentation checklist
+An interactive audit-readiness checklist covering all four areas Skatteverket expects: per-project documentation, per-person time tracking, monthly AGI filing, and long-term audit readiness. Each group has a live progress bar.
+
+### 📥 Skatteverket templates
+Download four pre-filled text templates: project description, monthly time log, qualifying people register, and AGI monthly claim summary — all with the correct law references.
+
+### 📄 PDF export
+Export a formatted report of all your assessed projects, ready to attach to Skatteverket correspondence. Opens a print view — use File → Print → Save as PDF in your browser.
+
+---
 
 ## Key law references
 
 | Reference | What it covers |
 |---|---|
-| Lag (2023:747) §3–5 | Qualifying criteria (3 gates) |
-| Lag (2023:747) §6 | Consultants also qualify |
-| Lag (2023:747) §7 | Deductions cannot be carried forward |
-| Prop. 2013/14:1 s.521–522 | Explicit exclusions (routine dev, maintenance) |
+| Lag (2023:747) §3–5 | Qualifying criteria — the three gates |
+| Lag (2023:747) §5 | Time threshold: ≥50% of working time AND ≥15 hours/month |
+| Lag (2023:747) §6 | Consultants (natural persons) also qualify |
+| Lag (2023:747) §7 | Deductions cannot be carried forward — claim every month |
+| Prop. 2013/14:1 s.521–522 | Explicit exclusions: routine dev, maintenance, support |
 
-## How to run locally
+---
 
-Just open `index.html` in a browser. No build step, no dependencies.
+## The three qualifying gates
 
-```bash
-# Clone the repo
-git clone https://github.com/YOUR_USERNAME/fou-portal.git
-cd fou-portal
+A project must pass **all three** to qualify:
 
-# Open directly
-open index.html
-```
+1. **Commercial purpose (§3)** — conducted within a commercial business (*näringsverksamhet*) with a profit motive
+2. **Systematic & qualified (§4)** — follows a defined methodology using scientific or engineering methods; not routine iteration or maintenance
+3. **New knowledge or substantially new product (§4)** — creates new knowledge or a substantially improved product/process; prior research must form the decisive foundation
 
-## Deploy to GitHub Pages
+---
+
+## How to use
+
+### Option A — GitHub Pages (recommended)
 
 1. Push this repo to GitHub
 2. Go to **Settings → Pages**
 3. Set source to **Deploy from a branch → main → / (root)**
-4. Your portal will be live at `https://YOUR_USERNAME.github.io/fou-portal/`
+4. Visit `https://YOUR_USERNAME.github.io/fou-portal/`
+
+### Option B — Run locally
+
+No build step or dependencies. Just open the file:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/fou-portal.git
+cd fou-portal
+open index.html
+```
+
+---
 
 ## File structure
 
+Everything is in a single self-contained file:
+
 ```
 fou-portal/
-├── index.html          # Main app
-├── css/
-│   └── style.css       # All styles
-├── js/
-│   └── app.js          # Calculator, modal, template downloads
+├── index.html    ← the entire portal (HTML + CSS + JS, all inline)
 └── README.md
 ```
 
+The portal uses no frameworks, no bundler, and no backend. The only external resources are Google Fonts and the Anthropic API (for AI analysis).
+
+---
+
+## AI analysis — how it works
+
+The AI assessment calls the Anthropic API directly from the browser. It sends your project description along with the full legal context of Lag (2023:747) and receives a structured JSON response with:
+
+- An overall verdict (qualifies / borderline / does not qualify)
+- A plain-language summary
+- A per-gate breakdown with a direct quote from your text for each gate
+- A specific watch-out if any exclusion risk is detected
+
+The gate checkboxes in Step 2 are **not** auto-filled — you read the analysis and make the decision yourself.
+
+---
+
+## Important rules to remember
+
+- **Both time conditions must be met in the same month** — ≥50% of working time AND ≥15 hours. A person working 20 total hours at 100% R&D fails. A person working 160 hours at 40% R&D also fails.
+- **No carry-forward** — unused deductions are lost. Claim every month on your AGI (arbetsgivardeklaration).
+- **Consultants count** — natural persons hired as consultants qualify under §6. The hiring entity claims the deduction.
+- **Group companies** — within a *koncern*, the parent claims first; surplus passes to subsidiaries.
+- **Retain records for 7 years** — Skatteförfarandelagen 39:3.
+
+---
+
 ## Disclaimer
 
-This tool is for guidance only. Consult a qualified Swedish tax advisor for your specific situation. Law and rates may change — always verify against current Skatteverket guidance.
+This tool is for internal planning and guidance only. Consult a qualified Swedish tax advisor (*skattekonsult*) before filing claims with Skatteverket. Law and rates may change — always verify against current Skatteverket guidance at [skatteverket.se](https://www.skatteverket.se).lt a qualified Swedish tax advisor for your specific situation. Law and rates may change — always verify against current Skatteverket guidance.
