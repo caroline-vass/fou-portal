@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FoU-avdrag Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+--bg:#F5F3EF;--card:#FFFFFF;--subtle:#ECEAE4;--ink:#1A1814;--muted:#6B6760;--faint:#B0ADA6;
+--gold:#C9990A;--gold-bg:#FDF5E0;--gold-bd:#E8C84A;
+--green:#2A7A4F;--green-bg:#EAF4EE;--green-bd:#A8D8BC;
+--red:#C0392B;--red-bg:#FDF0EE;
+--border:#E0DDD6;--r:12px;--r-sm:8px;
+--serif:'Instrument Serif',Georgia,serif;--sans:'Geist',system-ui,sans-serif;
+--shadow:0 2px 12px rgba(0,0,0,0.06);--shadow-lg:0 10px 48px rgba(0,0,0,0.12);
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+
+/* HEADER */
+.hdr{background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
+.hdr-in{max-width:880px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-b{background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 9px;border-radius:6px}
+.logo-n{font-family:var(--serif);font-size:17px;color:var(--ink)}
+nav a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;transition:all .18s;margin-left:2px}
+nav a:hover{color:var(--ink);background:var(--subtle)}
+
+/* HERO */
+.hero{background:var(--ink);color:#fff;padding:52px 24px 0;overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,153,10,.14) 0%,transparent 65%);pointer-events:none}
+.hero-in{max-width:880px;margin:0 auto;padding-bottom:44px;position:relative}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5.5vw,58px);font-weight:400;line-height:1.08;margin-bottom:16px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{font-size:15.5px;color:rgba(255,255,255,.52);max-width:460px;margin-bottom:36px;font-weight:300}
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:var(--r);padding:13px 18px;display:flex;flex-direction:column;gap:4px;min-width:140px}
+.pill-n{font-family:var(--serif);font-size:28px;color:var(--gold)}
+.pill-l{font-size:11px;color:rgba(255,255,255,.42);line-height:1.4}
+.hero-law{max-width:880px;margin:0 auto;background:rgba(201,153,10,.09);border-top:1px solid rgba(201,153,10,.22);padding:12px 24px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.6}
+.hero-law strong{color:var(--gold)}
+
+/* SECTIONS */
+.sec{padding:56px 24px}.sec.alt{background:var(--card)}
+.sec-lbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.sec-title{font-family:var(--serif);font-size:27px;font-weight:400;margin-bottom:8px}
+.sec-sub{font-size:15px;color:var(--muted);margin-bottom:28px;max-width:580px}
+
+/* GATES */
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:20px}
+.gate{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 18px;position:relative}
+.gate-n{position:absolute;top:12px;right:14px;font-family:var(--serif);font-size:42px;color:var(--subtle);line-height:1}
+.gate em{display:block;font-size:22px;margin-bottom:10px;font-style:normal}
+.gate h3{font-family:var(--serif);font-size:16px;font-weight:400;margin-bottom:7px}
+.gate p{font-size:13px;color:var(--muted);line-height:1.6}
+.excl{display:inline-block;margin-top:8px;font-size:11.5px;color:var(--red);background:var(--red-bg);padding:2px 8px;border-radius:4px}
+
+/* ASSESS */
+.assess-sec{background:var(--ink);padding:56px 24px}
+.assess-sec .sec-lbl{color:rgba(255,255,255,.35)}
+.assess-sec .sec-title{color:#fff}
+.assess-sec .sec-sub{color:rgba(255,255,255,.48)}
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
+.step-hd{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}
+.snum{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:rgba(255,255,255,.5);flex-shrink:0;transition:all .2s}
+.step.active .snum{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.step.done .snum{background:var(--green);border-color:var(--green);color:#fff}
+.sht strong{display:block;font-size:14px;font-weight:600;color:#fff}
+.sht span{font-size:12px;color:rgba(255,255,255,.4)}
+.sdone{margin-left:auto;font-size:11px;font-weight:600;color:#5ECFA0;display:none}
+.step.done .sdone{display:block}
+.step-bd{display:none;padding:0 20px 20px}
+.step.active .step-bd,.step.done .step-bd{display:block}
+
+/* form */
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.fld input,.fld textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);padding:10px 13px;font-family:var(--sans);font-size:14px;color:#fff;transition:border-color .2s;resize:vertical}
+.fld input::placeholder,.fld textarea::placeholder{color:rgba(255,255,255,.22)}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.1)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gck{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-sm);padding:11px 14px;display:flex;align-items:flex-start;gap:11px;cursor:pointer;margin-bottom:10px;transition:all .18s}
+.gck:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.08)}
+.gck.on{border-color:rgba(42,122,79,.55);background:rgba(42,122,79,.1)}
+.gck input{margin-top:3px;flex-shrink:0;accent-color:#5ECFA0;width:15px;height:15px}
+.gck-t strong{display:block;font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.gck-t small{font-size:11.5px;color:rgba(255,255,255,.38);line-height:1.4}
+.verdict{display:none;margin-top:4px;border-radius:var(--r-sm);padding:14px 16px}
+.verdict.show{display:flex;align-items:flex-start;gap:12px}
+.verdict.q{background:rgba(42,122,79,.18);border:1px solid rgba(42,122,79,.4)}
+.verdict.m{background:rgba(201,153,10,.16);border:1px solid rgba(201,153,10,.4)}
+.verdict.n{background:rgba(192,57,43,.18);border:1px solid rgba(192,57,43,.4)}
+.vi{font-size:20px;flex-shrink:0}
+.vt strong{display:block;font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.vt p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5}
+
+/* CLAUDE PROMPT BOX */
+.claude-box{margin-top:14px;border-radius:var(--r-sm);overflow:hidden;border:1px solid rgba(201,153,10,.3);background:rgba(201,153,10,.06)}
+.claude-box-hdr{background:rgba(201,153,10,.18);border-bottom:1px solid rgba(201,153,10,.3);padding:12px 16px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.claude-body{padding:16px}
+.claude-steps{font-size:13px;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:14px}
+.claude-steps ol{list-style:none;counter-reset:cstep;padding:0}
+.claude-steps li{counter-increment:cstep;padding:5px 0 5px 32px;position:relative}
+.claude-steps li::before{content:counter(cstep);position:absolute;left:0;top:5px;width:20px;height:20px;background:rgba(201,153,10,.25);border:1px solid rgba(201,153,10,.4);color:var(--gold);font-size:11px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans)}
+.claude-steps a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+.claude-actions{display:flex;gap:10px;flex-wrap:wrap}
+.copy-feedback{display:none;font-size:12px;color:#5ECFA0;align-self:center}
+.copy-feedback.show{display:inline}
+
+/* PROJECTS */
+.proj-sec{padding:56px 24px}
+.proj-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}
+.proj-acts{display:flex;gap:8px;flex-wrap:wrap}
+.plist{display:flex;flex-direction:column;gap:12px}
+.pempty{text-align:center;padding:48px 24px;color:var(--muted);font-size:15px;border:2px dashed var(--border);border-radius:var(--r)}
+.pempty span{display:block;font-size:32px;margin-bottom:12px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;transition:box-shadow .18s}
+.pcard:hover{box-shadow:var(--shadow)}
+.pcard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px}
+.pstat{font-size:11.5px;font-weight:600;display:block;margin-bottom:5px}
+.sq{color:var(--green)}.sm{color:#92650A}.sn{color:var(--red)}
+.pname{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:3px}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px;max-height:52px;overflow:hidden}
+.pr{text-align:right;flex-shrink:0}
+.ppeople{font-size:12px;color:var(--muted);margin-bottom:3px}
+.psave{font-family:var(--serif);font-size:16px;color:var(--green)}
+.psave.na{color:var(--muted);font-family:var(--sans);font-size:13px}
+.checks{display:flex;gap:8px;flex-wrap:wrap}
+.ck{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px}
+.cky{background:var(--green-bg);color:var(--green)}
+.ckn{background:var(--red-bg);color:var(--red)}
+.pcard-acts{margin-top:12px;display:flex;gap:8px}
+
+/* BUTTONS */
+.btn{border:none;border-radius:var(--r-sm);padding:10px 20px;font-family:var(--sans);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{opacity:.82;transform:translateY(-1px)}
+.btn-out{background:transparent;color:var(--ink);border:1px solid var(--border)}.btn-out:hover{background:var(--subtle);border-color:var(--ink)}
+.btn-wh{background:#fff;color:var(--ink)}.btn-wh:hover{background:#eee;transform:translateY(-1px)}
+.btn-gh{background:rgba(255,255,255,.09);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.14)}.btn-gh:hover{background:rgba(255,255,255,.15);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{opacity:.88;transform:translateY(-1px)}
+.btn:disabled{opacity:.32;cursor:not-allowed;transform:none!important}
+.bsm{padding:5px 12px;font-size:12px;border-radius:20px;background:var(--subtle);color:var(--ink);border:1px solid var(--border);cursor:pointer;font-family:var(--sans);font-weight:500;transition:all .18s}
+.bsm:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bsm.red:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* CALC */
+.calc-sec{background:var(--ink);padding:56px 24px}
+.calc-sec .sec-lbl{color:rgba(255,255,255,.35)}
+.calc-sec .sec-title{color:#fff}
+.calc-sec .sec-sub{color:rgba(255,255,255,.48)}
+.calc-g{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.calc-fs{display:flex;flex-direction:column;gap:14px}
+.cf label{display:block;font-size:13px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:6px}
+.cf input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-sm);padding:10px 13px;font-family:var(--sans);font-size:15px;color:#fff;transition:border-color .2s}
+.cf input:focus{outline:none;border-color:var(--gold)}
+.calc-r{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:22px}
+.rrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13.5px;color:rgba(255,255,255,.6)}
+.rrow:last-of-type{border-bottom:none}
+.rval{font-family:var(--serif);font-size:16px;color:#fff}
+.rval.g{color:#5ECFA0}.rval.b{color:#7FBCFF}
+.rbig{padding:14px 0;font-size:14px}.rbig .rval{font-size:22px}
+.cnote{margin-top:10px;font-size:11.5px;color:rgba(255,255,255,.35);line-height:1.5}
+
+/* TEMPLATES */
+.tlist{display:flex;flex-direction:column;gap:10px}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;display:flex;align-items:center;gap:18px;transition:box-shadow .18s}
+.tcard:hover{box-shadow:var(--shadow)}
+.ticon{font-size:26px;flex-shrink:0}
+.tinfo{flex:1}
+.tinfo h3{font-family:var(--serif);font-size:15.5px;font-weight:400;margin-bottom:3px}
+.tinfo p{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:5px}
+.ttag{font-size:10.5px;font-weight:700;letter-spacing:.07em;background:var(--subtle);color:var(--muted);padding:2px 7px;border-radius:4px}
+
+/* MODAL */
+.mwrap{display:none;position:fixed;inset:0;background:rgba(26,24,20,.6);z-index:300;align-items:center;justify-content:center;padding:20px}
+.mwrap.open{display:flex}
+.modal{background:var(--card);border-radius:var(--r);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:up .22s ease}
+.modal.wide{max-width:720px}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.mhdr{padding:22px 22px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:2}
+.mhdr h2{font-family:var(--serif);font-size:21px;font-weight:400}
+.mhdr .mhdr-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.mx{background:var(--subtle);border:none;border-radius:50%;width:30px;height:30px;font-size:13px;cursor:pointer;color:var(--muted);transition:background .18s}
+.mx:hover{background:var(--border);color:var(--ink)}
+.mbody{padding:22px}
+.mfld{margin-bottom:14px}
+.mfld label{display:block;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.mfld input,.mfld textarea,.mfld select{width:100%;border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 13px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--bg);transition:border-color .18s}
+.mfld input:focus,.mfld textarea:focus,.mfld select:focus{outline:none;border-color:var(--gold);background:#fff}
+.mfld textarea{resize:vertical;min-height:70px;font-family:var(--sans)}
+.mfld-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mfld-help{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.5}
+.mfld-law{font-size:10.5px;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1px solid var(--gold-bd);padding:1px 7px;border-radius:4px;display:inline-block;margin-left:6px;vertical-align:middle}
+.macts{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.tmpl-section{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.tmpl-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tmpl-section-title{font-family:var(--serif);font-size:16px;margin-bottom:10px;color:var(--ink)}
+.time-grid{display:grid;grid-template-columns:60px 1fr 1fr 1fr 80px;gap:8px;align-items:center;font-size:13px}
+.time-grid label{font-size:11px;font-weight:600;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.time-grid input{padding:7px 10px;font-size:13px}
+.time-grid .week-l{font-weight:600;color:var(--muted)}
+.time-total{background:var(--subtle);padding:8px 12px;border-radius:6px;margin-top:10px;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.time-total .qual{font-weight:700}
+.time-total .qual.pass{color:var(--green)}
+.time-total .qual.fail{color:var(--red)}
+.row-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.row-item{display:grid;grid-template-columns:30px 1.2fr 1fr 1fr 80px 60px 30px;gap:8px;align-items:center}
+.row-item input{padding:7px 10px;font-size:13px}
+.row-item .idx{font-size:12px;color:var(--muted);text-align:center;font-weight:600}
+.row-item .rm{background:var(--subtle);border:none;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;color:var(--muted)}
+.row-item .rm:hover{background:var(--red);color:#fff}
+.add-row{font-size:12px;color:var(--gold);background:none;border:1px dashed var(--gold);border-radius:6px;padding:7px 14px;cursor:pointer;font-family:var(--sans);font-weight:500}
+.add-row:hover{background:var(--gold-bg)}
+.consultant-list .row-item{grid-template-columns:30px 1.2fr 1fr 1fr 80px 60px 30px}
+.preview-banner{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:6px;padding:10px 14px;font-size:12.5px;color:#7A5500;line-height:1.5;margin-bottom:16px}
+
+/* CHECKLIST */
+.cl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cl-group{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.cl-group-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.cl-group-icon{font-size:18px}
+.cl-group-title{font-family:var(--serif);font-size:15px;font-weight:400}
+.cl-group-law{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:var(--subtle);padding:2px 8px;border-radius:4px;white-space:nowrap}
+.cl-items{padding:6px 0}
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:9px 18px;cursor:pointer;transition:background .15s}
+.cl-item:hover{background:var(--subtle)}
+.cl-item.checked{background:var(--green-bg)}
+.cl-cb{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--green);cursor:pointer}
+.cl-item-text strong{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.cl-item-text span{font-size:12px;color:var(--muted);line-height:1.4}
+.cl-item.warn .cl-item-text strong{color:#92650A}
+.cl-progress{padding:12px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.cl-bar-wrap{flex:1;height:5px;background:var(--subtle);border-radius:3px;overflow:hidden}
+.cl-bar{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
+.cl-pct{font-size:11.5px;font-weight:600;color:var(--green);min-width:36px;text-align:right}
+.cl-alert{margin-top:16px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--r-sm);padding:13px 16px;font-size:13px;color:#7A5500;line-height:1.6}
+.cl-alert strong{display:block;margin-bottom:3px}
+@media(max-width:620px){.cl-grid{grid-template-columns:1fr}}
+
+footer{background:var(--subtle);border-top:1px solid var(--border);padding:28px 24px;font-size:12.5px;color:var(--muted);line-height:1.7}
+footer p+p{margin-top:4px}
+
+@media(max-width:620px){
+.row2,.calc-g{grid-template-columns:1fr}
+.pills,.pcard-top,.proj-hdr{flex-direction:column}
+.pr{text-align:left}.pill{min-width:unset}
+nav{display:none}
+.time-grid{grid-template-columns:50px 1fr 1fr 1fr 60px;font-size:12px}
+.row-item{grid-template-columns:24px 1fr 1fr 60px 24px;font-size:12px}
+.row-item .col-hide{display:none}
+}
+
+@media print{
+body{background:#fff}
+.hdr,.hero,.assess-sec,.calc-sec,.sec:not(.proj-sec),.sec.alt:not(.tmpl-sec),footer,.proj-acts,.pcard-acts,.btn,button{display:none!important}
+.proj-sec{padding:0}
+.pcard{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;margin-bottom:12px}
+.wrap{max-width:100%;padding:0}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+<div class="hdr-in">
+<a class="logo" href="#"><span class="logo-b">FoU</span><span class="logo-n">Avdrag Portal</span></a>
+<nav>
+<a href="#how">How it works</a>
+<a href="#assess">Assess project</a>
+<a href="#projects">My projects</a>
+<a href="#calculator">Calculator</a>
+<a href="#checklist">Checklist</a>
+<a href="#templates">Templates</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-in">
+<div class="eyebrow">Lag (2023:747) om FoU-avdrag</div>
+<h1>Cut employer contributions<br/>from 31.42% to <em>11.42%</em><br/>for qualifying R&amp;D</h1>
+<p>Real cash saved every month, not just a tax deduction. ~10 000 kr per person at a 60 000 kr salary.</p>
+<div class="pills">
+<div class="pill"><span class="pill-n">20%</span><span class="pill-l">deducted from arbetsgivaravgifter</span></div>
+<div class="pill"><span class="pill-n">3 MSEK</span><span class="pill-l">max deduction per month</span></div>
+<div class="pill"><span class="pill-n">≥50%</span><span class="pill-l">working time must be on R&amp;D</span></div>
+</div>
+</div>
+<div class="hero-law"><strong>§ Law reference:</strong> Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter. Exclusions: <strong>Prop. 2013/14:1 s.521–522</strong>.</div>
+</section>
+
+<section class="sec" id="how">
+<div class="wrap">
+<div class="sec-lbl">The three qualifying gates</div>
+<h2 class="sec-title">Does your project qualify?</h2>
+<p class="sec-sub">All three gates must be passed. Routine development, maintenance, and support are <strong>explicitly excluded</strong> (Prop. 2013/14:1 s.521–522).</p>
+<div class="gates">
+<div class="gate"><span class="gate-n">01</span><em>🏢</em><h3>Commercial purpose</h3><p>Conducted within a commercial business (<em>näringsverksamhet</em>). Internal research for your own products counts.</p><span class="excl">§3 lag om FoU-avdrag</span></div>
+<div class="gate"><span class="gate-n">02</span><em>🔬</em><h3>Systematic and qualified</h3><p>Systematic research using scientific methods. Ad-hoc fixes or routine iteration do <strong>not</strong> qualify.</p><span class="excl">§4 lag om FoU-avdrag</span></div>
+<div class="gate"><span class="gate-n">03</span><em>💡</em><h3>New knowledge or product</h3><p>Creates new knowledge, or a substantially new/improved product. Research must be the <em>decisive foundation</em>.</p><span class="excl">§4 lag om FoU-avdrag</span></div>
+</div>
+</div>
+</section>
+
+<section class="assess-sec" id="assess">
+<div class="wrap">
+<div class="sec-lbl">Step-by-step</div>
+<h2 class="sec-title">Assess a project</h2>
+<p class="sec-sub">Paste your project description from Google Docs, work through the three gates, then add it to your project list.</p>
+<div class="steps">
+
+<div class="step active" id="s1">
+<div class="step-hd" onclick="toggleStep('s1')">
+<div class="snum">1</div>
+<div class="sht"><strong>Project details</strong><span>Name, description, team size</span></div>
+<span class="sdone">✓ Done</span>
+</div>
+<div class="step-bd">
+<div class="fld"><label>Project name</label><input type="text" id="pName" placeholder="e.g. AI Churn Prediction Engine"/></div>
+<div class="fld"><label>Project description, paste from Google Docs</label><textarea id="pDesc" rows="6" placeholder="Paste your full project description here. Include: what you're building, what's novel, what research or methods you're using..."></textarea></div>
+<div class="row2">
+<div class="fld"><label>People on this project (≥50% time)</label><input type="number" id="pPeople" value="1" min="0"/></div>
+<div class="fld"><label>Avg monthly salary per person (kr)</label><input type="number" id="pSalary" value="60000" min="0"/></div>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+<button class="btn btn-gold" onclick="prepareClaudePrompt()">✦ Get an AI second opinion</button>
+<button class="btn btn-wh" onclick="nextStep('s1','s2')">Skip to gate check →</button>
+</div>
+
+<div class="claude-box" id="claudeBox" style="display:none">
+<div class="claude-box-hdr">✦ AI second opinion via Claude.ai</div>
+<div class="claude-body">
+<div class="claude-steps">
+<ol>
+<li>Click <strong>Copy prompt</strong> below. Your description is already included.</li>
+<li>Open <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> in a new tab. A free account works fine.</li>
+<li>Paste, send, and read the verdict against all three gates.</li>
+<li>Come back here and tick the gates in step 2 based on what Claude tells you.</li>
+</ol>
+</div>
+<div class="claude-actions">
+<button class="btn btn-gold" onclick="copyClaudePrompt()">📋 Copy prompt</button>
+<a class="btn btn-wh" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude.ai →</a>
+<span class="copy-feedback" id="copyFeedback">✓ Copied to clipboard</span>
+</div>
+</div>
+</div>
+
+<div style="margin-top:12px">
+<button class="btn btn-wh" id="continueAfterAI" onclick="nextStep('s1','s2')" style="display:none">Now fill in the gate check →</button>
+</div>
+</div>
+</div>
+
+<div class="step" id="s2">
+<div class="step-hd" onclick="toggleStep('s2')">
+<div class="snum">2</div>
+<div class="sht"><strong>Three-gate check</strong><span>Check each qualifying criterion</span></div>
+<span class="sdone">✓ Done</span>
+</div>
+<div class="step-bd">
+<p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:14px;">Be honest. Skatteverket can audit. If in doubt, leave it unchecked.</p>
+<label class="gck" id="gc1" onclick="syncGate('gc1','g1')"><input type="checkbox" id="g1"/><div class="gck-t"><strong>Gate 1, Commercial purpose (§3)</strong><small>The project is conducted within our business (<em>näringsverksamhet</em>) and results serve a commercial purpose.</small></div></label>
+<label class="gck" id="gc2" onclick="syncGate('gc2','g2')"><input type="checkbox" id="g2"/><div class="gck-t"><strong>Gate 2, Systematic and qualified (§4)</strong><small>Follows a systematic methodology using scientific or engineering methods. Not routine bug fixing, maintenance, or iteration on existing products.</small></div></label>
+<label class="gck" id="gc3" onclick="syncGate('gc3','g3')"><input type="checkbox" id="g3"/><div class="gck-t"><strong>Gate 3, New knowledge or substantially new product (§4)</strong><small>Goal is to create new knowledge or a substantially new/improved product or process. Prior research forms the decisive foundation.</small></div></label>
+<div class="verdict" id="verdict"></div>
+<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="btn btn-gh" onclick="checkGates()">Check eligibility</button>
+<button class="btn btn-wh" onclick="nextStep('s2','s3')">Continue →</button>
+</div>
+</div>
+</div>
+
+<div class="step" id="s3">
+<div class="step-hd" onclick="toggleStep('s3')">
+<div class="snum">3</div>
+<div class="sht"><strong>Documentation narrative</strong><span>Your Skatteverket justification</span></div>
+<span class="sdone">✓ Done</span>
+</div>
+<div class="step-bd">
+<p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:14px;">This text goes into your official project description. It will appear in the exported PDF.</p>
+<div class="fld"><label>How does this project create new knowledge or a substantially new product?</label><textarea id="pNewK" rows="3" placeholder="e.g. We are developing a novel algorithm for real-time anomaly detection that does not exist in prior art. The work uses transformer architecture research as its decisive foundation..."></textarea></div>
+<div class="fld"><label>What systematic methodology do you follow?</label><textarea id="pMethod" rows="3" placeholder="e.g. Hypothesis-driven development: (1) problem formulation, (2) literature review, (3) experimental implementation, (4) benchmark evaluation..."></textarea></div>
+<div class="row2">
+<div class="fld"><label>Project start date</label><input type="month" id="pStart"/></div>
+<div class="fld"><label>Project end / ongoing</label><input type="month" id="pEnd" placeholder="Leave blank if ongoing"/></div>
+</div>
+<button class="btn btn-gold" onclick="addProject()">✓ Add to my projects</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="proj-sec" id="projects">
+<div class="wrap">
+<div class="proj-hdr">
+<div>
+<div class="sec-lbl">Your portfolio</div>
+<h2 class="sec-title">My projects</h2>
+<p class="sec-sub" style="margin-bottom:0">Projects assessed this session.</p>
+</div>
+<div class="proj-acts">
+<button class="btn btn-out" id="printBtn" onclick="window.print()" disabled>🖨 Print view</button>
+<button class="btn btn-dark" id="exportBtn" onclick="openExport()" disabled>↓ Export PDF</button>
+</div>
+</div>
+<div class="plist" id="plist">
+<div class="pempty" id="pempty"><span>📂</span>Assessed projects appear here.<br/>Start by filling in the form above.</div>
+</div>
+</div>
+</section>
+
+<div class="mwrap" id="exportModal">
+<div class="modal">
+<div class="mhdr"><div><h2>Export for Skatteverket</h2></div><button class="mx" onclick="closeExport()">✕</button></div>
+<div class="mbody">
+<p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.6">Opens a formatted print view. Use <strong>File → Print → Save as PDF</strong> in your browser to download.</p>
+<div class="mfld"><label>Company name</label><input type="text" id="eCo" placeholder="Your AB"/></div>
+<div class="mfld"><label>Organisation number</label><input type="text" id="eOrg" placeholder="556XXX-XXXX"/></div>
+<div class="mfld"><label>Reporting month</label><input type="month" id="eMon"/></div>
+<div class="mfld"><label>Prepared by</label><input type="text" id="eBy" placeholder="Your name"/></div>
+<div class="macts">
+<button class="btn btn-dark" onclick="genPDF()">Open print view</button>
+<button class="btn btn-out" onclick="closeExport()">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+
+<section class="calc-sec" id="calculator">
+<div class="wrap">
+<div class="sec-lbl">Monthly savings</div>
+<h2 class="sec-title">Savings calculator</h2>
+<p class="sec-sub">Unused deductions cannot be carried forward. Claim every month on AGI (§7).</p>
+<div class="calc-g">
+<div class="calc-fs">
+<div class="cf"><label>Qualifying employees / consultants</label><input type="number" id="cPpl" value="3" min="0"/></div>
+<div class="cf"><label>Average monthly salary (kr)</label><input type="number" id="cSal" value="60000" min="0"/></div>
+<div class="cf"><label>% of time on R&amp;D (min 50%)</label><input type="number" id="cPct" value="100" min="50" max="100"/></div>
+<button class="btn btn-wh" onclick="doCalc()">Calculate</button>
+</div>
+<div class="calc-r">
+<div class="rrow"><span>Normal arbetsgivaravgifter</span><span class="rval" id="rN">—</span></div>
+<div class="rrow"><span>R&amp;D deduction (20%)</span><span class="rval g" id="rD">—</span></div>
+<div class="rrow"><span>Net contributions payable</span><span class="rval b" id="rE">—</span></div>
+<div class="rrow rbig"><span><strong>Monthly saving</strong></span><span class="rval g" id="rM">—</span></div>
+<div class="rrow rbig"><span><strong>Annual saving</strong></span><span class="rval g" id="rA">—</span></div>
+<div class="cnote" id="cnote"></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec alt tmpl-sec" id="templates">
+<div class="wrap">
+<div class="sec-lbl">Documentation</div>
+<h2 class="sec-title">Fillable Skatteverket templates</h2>
+<p class="sec-sub">Click any template, fill in the fields, and export a clean PDF ready for your records. Skatteverket can audit any period, so have these on file before you claim.</p>
+<div class="tlist">
+<div class="tcard"><span class="ticon">📋</span><div class="tinfo"><h3>Project Description</h3><p>Links your project to all three qualifying criteria. One per project.</p><span class="ttag">§3–5</span></div><button class="btn btn-out" onclick="openTmpl('proj')">✎ Fill in</button></div>
+<div class="tcard"><span class="ticon">⏱</span><div class="tinfo"><h3>Monthly Time Log (per person)</h3><p>Proves both conditions per §5: ≥50% of working time on R&amp;D, AND at least 15 hours/month. One log per person per month.</p><span class="ttag">§5</span></div><button class="btn btn-out" onclick="openTmpl('time')">✎ Fill in</button></div>
+<div class="tcard"><span class="ticon">👥</span><div class="tinfo"><h3>Qualifying People Register</h3><p>All employees and consultants (§6) with monthly qualifying salary.</p><span class="ttag">§5–6</span></div><button class="btn btn-out" onclick="openTmpl('ppl')">✎ Fill in</button></div>
+<div class="tcard"><span class="ticon">📊</span><div class="tinfo"><h3>AGI Monthly Claim Summary</h3><p>Monthly arbetsgivardeklaration entry sheet. No carry-forward (§7).</p><span class="ttag">§7</span></div><button class="btn btn-out" onclick="openTmpl('agi')">✎ Fill in</button></div>
+</div>
+</div>
+</section>
+
+<!-- TEMPLATE MODALS -->
+<div class="mwrap" id="tmplModal">
+<div class="modal wide">
+<div class="mhdr">
+<div><h2 id="tmHead">Template</h2><div class="mhdr-sub" id="tmSub"></div></div>
+<button class="mx" onclick="closeTmpl()">✕</button>
+</div>
+<div class="mbody" id="tmBody"></div>
+</div>
+</div>
+
+<section class="sec" id="checklist">
+<div class="wrap">
+<div class="sec-lbl">Audit readiness</div>
+<h2 class="sec-title">Documentation checklist</h2>
+<p class="sec-sub">Tick each item off as you prepare it. Skatteverket can request documentation for any claimed period. Have everything below in place <em>before</em> you file on AGI.</p>
+
+<div class="cl-alert">
+<strong>⚠ Two rules from CauseyWestling and Lag (2023:747) that catch people out:</strong>
+The ≥50% time threshold and the ≥15 hours/month floor are two <strong>separate conditions that must both be met in the same month</strong>. A person working 20 hours total at 100% R&D fails (under 15h). A person working 160 hours at 40% R&D also fails (under 50%). Also: if someone misses the threshold one month but their tasks have not changed, they may still qualify under the continuity rule. Document both carefully.
+</div>
+
+<div class="cl-grid" style="margin-top:20px">
+
+<div class="cl-group" id="clg-project">
+<div class="cl-group-hdr"><span class="cl-group-icon">📁</span><span class="cl-group-title">Per qualifying project</span><span class="cl-group-law">§3–4 lag om FoU-avdrag</span></div>
+<div class="cl-items">
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Project description document</strong><span>Narrative covering all three gates: commercial purpose, systematic method, new knowledge/product.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Research foundation documented</strong><span>What prior research or external knowledge underpins this work? The research result must be a <em>decisive prerequisite</em> for the development.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Methodology description</strong><span>How is the work systematic? Describe the method or plan used to investigate, execute, and follow up findings.</span></div></label>
+<label class="cl-item warn" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Exclusion check done</strong><span>Confirmed that no support or ancillary functions (support, ops, maintenance) are included in the qualifying scope.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Project linked to company's commercial activity</strong><span>Clear line between R&D output and the commercial purpose (vinstsyfte) of the business.</span></div></label>
+</div>
+<div class="cl-progress"><div class="cl-bar-wrap"><div class="cl-bar" id="bar-project" style="width:0%"></div></div><span class="cl-pct" id="pct-project">0%</span></div>
+</div>
+
+<div class="cl-group" id="clg-person">
+<div class="cl-group-hdr"><span class="cl-group-icon">👤</span><span class="cl-group-title">Per qualifying person / month</span><span class="cl-group-law">§5–6 lag om FoU-avdrag</span></div>
+<div class="cl-items">
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Monthly time log completed</strong><span>Actual hours logged per week, R&D vs other. Not estimates.</span></div></label>
+<label class="cl-item warn" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>≥50% of working time AND ≥15 hours/month, both required</strong><span>These are two separate conditions that must both be true in the same month. A person working 20h/month at 100% R&D fails (under 15h). A person working 160h/month at 40% R&D also fails (under 50%).</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Role qualifies (not support/kring)</strong><span>The person's actual tasks contain real R&D content, not project management, IT support, or administration.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Consultants: natural person confirmed (§6)</strong><span>If using consultants, confirmed they are natural persons. The hiring entity claims the deduction.</span></div></label>
+<label class="cl-item warn" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Continuity check if threshold missed</strong><span>If a person fell below threshold this month: have you confirmed their tasks are unchanged from qualifying months?</span></div></label>
+</div>
+<div class="cl-progress"><div class="cl-bar-wrap"><div class="cl-bar" id="bar-person" style="width:0%"></div></div><span class="cl-pct" id="pct-person">0%</span></div>
+</div>
+
+<div class="cl-group" id="clg-filing">
+<div class="cl-group-hdr"><span class="cl-group-icon">📅</span><span class="cl-group-title">Monthly AGI filing</span><span class="cl-group-law">§7 lag om FoU-avdrag</span></div>
+<div class="cl-items">
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Qualifying salary base calculated</strong><span>Sum of deduction bases (salary × R&D%) for all qualifying persons this month.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Cap check done (max 3 MSEK deduction)</strong><span>Qualifying salary base must not exceed 15 MSEK/month. Cap applies since 1 January 2024.</span></div></label>
+<label class="cl-item warn" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Claimed in this month's AGI, not deferred</strong><span>Unused deductions cannot be carried forward (§7). If you miss a month, that saving is gone.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Group structure considered (koncern)</strong><span>If part of a group: parent claims first. Any remaining deduction capacity passes to subsidiaries.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>AGI submitted on time</strong><span>Electronic filing deadline is the 12th of the following month.</span></div></label>
+</div>
+<div class="cl-progress"><div class="cl-bar-wrap"><div class="cl-bar" id="bar-filing" style="width:0%"></div></div><span class="cl-pct" id="pct-filing">0%</span></div>
+</div>
+
+<div class="cl-group" id="clg-audit">
+<div class="cl-group-hdr"><span class="cl-group-icon">🔍</span><span class="cl-group-title">Audit readiness</span><span class="cl-group-law">Skatteförfarandelagen</span></div>
+<div class="cl-items">
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>All documents stored and accessible</strong><span>Project descriptions, time logs, and people registers in one place. Retention: minimum 7 years (SFL 39:3).</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Documentation created contemporaneously</strong><span>Records should be created at the time of work, not reconstructed after the fact.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Internal sign-off obtained</strong><span>Project description and time logs reviewed and approved by a manager or CFO.</span></div></label>
+<label class="cl-item warn" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>No support functions included</strong><span>Final check: no IT ops, project management, sales, HR, or other kringfunktioner have been included in the claim.</span></div></label>
+<label class="cl-item" onclick="tickItem(this)"><input type="checkbox" class="cl-cb"/><div class="cl-item-text"><strong>Tax advisor consulted (recommended)</strong><span>Especially for first claim or if any borderline projects are included.</span></div></label>
+</div>
+<div class="cl-progress"><div class="cl-bar-wrap"><div class="cl-bar" id="bar-audit" style="width:0%"></div></div><span class="cl-pct" id="pct-audit">0%</span></div>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<p>Legal basis: <strong>Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter</strong>. Qualifying criteria: §3–5. Consultants: §6. No carry-forward: §7. Exclusions: <strong>Prop. 2013/14:1 s.521–522</strong>.</p>
+<p>Guidance only. Consult a qualified Swedish tax advisor for your specific situation.</p>
+</div>
+</footer>
+
+<script>
+const RATE=0.3142,DED=0.20,CAP=3000000;
+let projects=[];
+
+function toggleStep(id){const e=document.getElementById(id);if(!e.classList.contains('active'))e.classList.toggle('active');}
+function nextStep(cur,nxt){const c=document.getElementById(cur),n=document.getElementById(nxt);c.classList.remove('active');c.classList.add('done');n.classList.add('active');n.scrollIntoView({behavior:'smooth',block:'nearest'});}
+function syncGate(cardId,cbId){
+  const card=document.getElementById(cardId),cb=document.getElementById(cbId);
+  setTimeout(()=>card.classList.toggle('on',cb.checked),0);
+}
+
+function checkGates(){
+  const g1=document.getElementById('g1').checked,g2=document.getElementById('g2').checked,g3=document.getElementById('g3').checked;
+  const p=[g1,g2,g3].filter(Boolean).length;
+  const v=document.getElementById('verdict');
+  v.className='verdict show '+(p===3?'q':p===2?'m':'n');
+  const msgs={3:['✅','Likely qualifies','All three gates passed. Make sure you have documentation ready before claiming on AGI.'],2:['⚠️',`Borderline, ${p}/3 gates passed`,'Missing gate(s). Consider consulting a tax advisor before claiming.'],1:['❌',`Does not qualify (${p}/3)`,'Routine development, maintenance, and support are explicitly excluded (Prop. 2013/14:1 s.521–522).'],0:['❌','Does not qualify (0/3)','None of the qualifying criteria are met.']};
+  const [icon,title,text]=msgs[p]||msgs[0];
+  v.innerHTML=`<span class="vi">${icon}</span><div class="vt"><strong>${title}</strong><p>${text}</p></div>`;
+}
+
+function addProject(){
+  const name=document.getElementById('pName').value.trim();
+  if(!name){alert('Please enter a project name in Step 1.');return;}
+  const desc=document.getElementById('pDesc').value.trim();
+  const people=parseInt(document.getElementById('pPeople').value)||0;
+  const salary=parseInt(document.getElementById('pSalary').value)||0;
+  const g1=document.getElementById('g1').checked,g2=document.getElementById('g2').checked,g3=document.getElementById('g3').checked;
+  const newK=document.getElementById('pNewK').value.trim();
+  const method=document.getElementById('pMethod').value.trim();
+  const start=document.getElementById('pStart').value;
+  const end=document.getElementById('pEnd').value;
+  const passed=[g1,g2,g3].filter(Boolean).length;
+  const sk=passed===3?'q':passed===2?'m':'n';
+  const save=sk==='q'?people*salary*DED:0;
+  projects.push({id:Date.now(),name,desc,people,salary,gates:[g1,g2,g3],passed,sk,save,newK,method,start,end});
+  renderProjects();resetAssess();
+  document.getElementById('projects').scrollIntoView({behavior:'smooth'});
+}
+
+function renderProjects(){
+  const list=document.getElementById('plist'),empty=document.getElementById('pempty');
+  const pb=document.getElementById('printBtn'),eb=document.getElementById('exportBtn');
+  if(!projects.length){empty.style.display='block';pb.disabled=eb.disabled=true;return;}
+  empty.style.display='none';pb.disabled=eb.disabled=false;
+  list.innerHTML='';
+  [...projects].reverse().forEach(p=>{
+    const sl=p.sk==='q'?'● Likely qualifies':p.sk==='m'?'⚠ Borderline':'✗ Does not qualify';
+    const ss=p.sk==='q'?`~${fkr(p.save)} kr/mo saved`:p.sk==='m'?'Review needed':'Not qualifying';
+    const [g1,g2,g3]=p.gates;
+    const d=document.createElement('div');d.className='pcard';
+    d.innerHTML=`<div class="pcard-top"><div style="flex:1"><span class="pstat s${p.sk}">${sl}</span><div class="pname">${esc(p.name)}</div><div class="pdesc">${esc(p.desc)||'<em>No description</em>'}</div><div class="checks"><span class="ck ${g1?'cky':'ckn'}">${g1?'✓':'✗'} Commercial</span><span class="ck ${g2?'cky':'ckn'}">${g2?'✓':'✗'} Systematic</span><span class="ck ${g3?'cky':'ckn'}">${g3?'✓':'✗'} New knowledge</span></div></div><div class="pr"><div class="ppeople">${p.people} ${p.people===1?'person':'people'}</div><div class="psave ${p.sk==='q'?'':'na'}">${ss}</div></div></div><div class="pcard-acts"><button class="bsm red" onclick="removeP(${p.id})">Remove</button></div>`;
+    list.appendChild(d);
+  });
+}
+
+function removeP(id){projects=projects.filter(p=>p.id!==id);renderProjects();}
+
+function resetAssess(){
+  ['pName','pDesc','pNewK','pMethod','pStart','pEnd'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pPeople').value=1;document.getElementById('pSalary').value=60000;
+  ['g1','g2','g3'].forEach(id=>document.getElementById(id).checked=false);
+  ['gc1','gc2','gc3'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('verdict').className='verdict';
+  document.getElementById('claudeBox').style.display='none';
+  document.getElementById('continueAfterAI').style.display='none';
+  ['s1','s2','s3'].forEach(id=>{const e=document.getElementById(id);e.classList.remove('done','active');});
+  document.getElementById('s1').classList.add('active');
+}
+
+function openExport(){
+  const now=new Date();
+  document.getElementById('eMon').value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  document.getElementById('exportModal').classList.add('open');
+}
+function closeExport(){document.getElementById('exportModal').classList.remove('open');}
+
+function genPDF(){
+  const co=document.getElementById('eCo').value.trim()||'[Company]';
+  const org=document.getElementById('eOrg').value.trim()||'[Org.nr]';
+  const mon=document.getElementById('eMon').value||'';
+  const by=document.getElementById('eBy').value.trim()||'[Name]';
+  const mfmt=mon?new Date(mon+'-01').toLocaleDateString('sv-SE',{year:'numeric',month:'long'}):'';
+  const qps=projects.filter(p=>p.sk==='q'),bps=projects.filter(p=>p.sk==='m');
+  const tot=qps.reduce((s,p)=>s+p.save,0);
+  const rows=projects.map(p=>{
+    const [g1,g2,g3]=p.gates;
+    const sc=p.sk==='q'?'#2A7A4F':p.sk==='m'?'#92650A':'#C0392B';
+    const sl=p.sk==='q'?'Likely qualifies':p.sk==='m'?'Borderline':'Does not qualify';
+    return `<div style="border:1px solid #e0ddd6;border-radius:8px;padding:18px 20px;margin-bottom:14px;page-break-inside:avoid;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+    <div><span style="font-size:11px;font-weight:700;color:${sc};text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px;">${sl}</span>
+    <div style="font-family:Georgia,serif;font-size:19px;margin-bottom:4px;">${esc(p.name)}</div>
+    <div style="font-size:13px;color:#6B6760;line-height:1.5;">${esc(p.desc)}</div></div>
+    <div style="text-align:right;flex-shrink:0;margin-left:20px;">
+    <div style="font-size:12px;color:#aaa;margin-bottom:3px;">${p.people} person(s), avg ${fkr(p.salary)} kr/mo</div>
+    <div style="font-family:Georgia,serif;font-size:16px;color:${sc};">${p.sk==='q'?`Est. ${fkr(p.save)} kr/month saved`:'—'}</div>
+    </div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:${p.newK||p.method?'12px':'0'}">
+    <span style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px;background:${g1?'#EAF4EE':'#FDF0EE'};color:${g1?'#2A7A4F':'#C0392B'}">${g1?'✓':'✗'} Commercial (§3)</span>
+    <span style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px;background:${g2?'#EAF4EE':'#FDF0EE'};color:${g2?'#2A7A4F':'#C0392B'}">${g2?'✓':'✗'} Systematic (§4)</span>
+    <span style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px;background:${g3?'#EAF4EE':'#FDF0EE'};color:${g3?'#2A7A4F':'#C0392B'}">${g3?'✓':'✗'} New knowledge (§4)</span>
+    </div>
+    ${p.newK?`<div style="margin-top:10px;"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#aaa;margin-bottom:4px;">New knowledge / product</div><div style="font-size:13px;color:#444;line-height:1.6;">${esc(p.newK)}</div></div>`:''}
+    ${p.method?`<div style="margin-top:10px;"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#aaa;margin-bottom:4px;">Methodology</div><div style="font-size:13px;color:#444;line-height:1.6;">${esc(p.method)}</div></div>`:''}
+    ${p.start?`<div style="margin-top:8px;font-size:12px;color:#aaa;">Period: ${p.start}${p.end?' → '+p.end:' → ongoing'}</div>`:''}
+    </div>`;
+  }).join('');
+  const html=`<!DOCTYPE html><html lang="sv"><head><meta charset="UTF-8"/><title>FoU-avdrag, ${esc(co)}, ${mfmt}</title>
+  <style>body{font-family:system-ui,sans-serif;color:#1A1814;background:#fff;margin:0;padding:32px 40px;font-size:14px;line-height:1.6}@media print{body{padding:20px}}</style>
+  </head><body>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid #1A1814;">
+  <div><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#aaa;margin-bottom:6px;">FoU-avdrag Assessment Report</div>
+  <div style="font-family:Georgia,serif;font-size:28px;margin-bottom:3px;">${esc(co)}</div>
+  <div style="font-size:13px;color:#888;">Org.nr ${esc(org)} · Reporting month: ${mfmt}</div></div>
+  <div style="text-align:right;font-size:12px;color:#aaa;"><div>Prepared by: ${esc(by)}</div><div>Date: ${new Date().toLocaleDateString('sv-SE')}</div><div style="margin-top:4px;font-size:11px;">Lag (2023:747) om FoU-avdrag</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px;">
+  <div style="background:#EAF4EE;border:1px solid #A8D8BC;border-radius:8px;padding:14px 16px;"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#2A7A4F;font-weight:700;margin-bottom:6px;">Qualifying projects</div><div style="font-family:Georgia,serif;font-size:28px;">${qps.length}</div></div>
+  <div style="background:#FDF5E0;border:1px solid #E8C84A;border-radius:8px;padding:14px 16px;"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#92650A;font-weight:700;margin-bottom:6px;">Borderline</div><div style="font-family:Georgia,serif;font-size:28px;">${bps.length}</div></div>
+  <div style="background:#EAF4EE;border:1px solid #A8D8BC;border-radius:8px;padding:14px 16px;"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#2A7A4F;font-weight:700;margin-bottom:6px;">Est. monthly saving</div><div style="font-family:Georgia,serif;font-size:28px;">${fkr(tot)} kr</div></div>
+  </div>
+  <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #eee;">Project assessments (${projects.length} total)</h2>
+  ${rows}
+  <div style="margin-top:32px;padding-top:16px;border-top:1px solid #ddd;font-size:11px;color:#bbb;line-height:1.8;">
+  <strong style="color:#999;">Legal basis:</strong> Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter. §3–5 (criteria), §6 (consultants), §7 (no carry-forward). Exclusions: Prop. 2013/14:1 s.521–522.<br/>
+  <strong style="color:#999;">Disclaimer:</strong> Internal planning only. Consult a qualified Swedish tax advisor before filing.
+  </div></body></html>`;
+  const w=window.open('','_blank');w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),600);closeExport();
+}
+
+function doCalc(){
+  const ppl=parseInt(document.getElementById('cPpl').value)||0;
+  const sal=parseInt(document.getElementById('cSal').value)||0;
+  const pct=Math.min(100,Math.max(50,parseInt(document.getElementById('cPct').value)||100))/100;
+  const tot=ppl*sal,qb=tot*pct,norm=tot*RATE,cap=Math.min(qb,CAP/DED),ded=cap*DED;
+  document.getElementById('rN').textContent=fkr(norm)+' kr';
+  document.getElementById('rD').textContent='−'+fkr(ded)+' kr';
+  document.getElementById('rE').textContent=fkr(norm-ded)+' kr';
+  document.getElementById('rM').textContent=fkr(ded)+' kr';
+  document.getElementById('rA').textContent=fkr(ded*12)+' kr';
+  document.getElementById('cnote').textContent=qb>CAP/DED?'Capped at 3 MSEK deduction/month (§4).':'Unused deductions cannot be carried forward. Claim monthly on AGI (§7).';
+}
+doCalc();
+
+function fkr(n){return Math.round(n).toLocaleString('sv-SE');}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function tickItem(label){
+  setTimeout(()=>{
+    const cb=label.querySelector('.cl-cb');
+    label.classList.toggle('checked',cb.checked);
+    const group=label.closest('.cl-group');
+    if(!group)return;
+    const id=group.id.replace('clg-','');
+    const all=group.querySelectorAll('.cl-cb');
+    const done=[...all].filter(c=>c.checked).length;
+    const pct=Math.round(done/all.length*100);
+    const bar=document.getElementById('bar-'+id);
+    const pctEl=document.getElementById('pct-'+id);
+    if(bar)bar.style.width=pct+'%';
+    if(pctEl)pctEl.textContent=pct+'%';
+  },0);
+}
+
+// ── CLAUDE.AI PROMPT FLOW ─────────────────────────────────────────────
+function buildClaudePrompt(){
+  const name=document.getElementById('pName').value.trim()||'(not provided)';
+  const desc=document.getElementById('pDesc').value.trim();
+  return `You are a Swedish tax specialist in FoU-avdrag (R&D employer contribution deductions) under Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter.
+
+Please assess my project against the three qualifying gates. Be specific, quote or paraphrase exact phrases from my description to explain WHY each gate passes or fails. Also flag any routine or excluded work (Prop. 2013/14:1 s.521–522) if you see it.
+
+Give me:
+1. An overall verdict: qualifies / borderline / does not qualify
+2. A 2-3 sentence plain-language summary
+3. For each gate (§3 commercial purpose, §4 systematic methodology, §4 new knowledge or substantially new product): pass / warn / fail, with the specific phrase from my text that supports it and a short reasoning
+4. Any specific exclusion risk or thing I should document better
+
+Here is my project:
+
+---
+Project name: ${name}
+
+${desc}
+---`;
+}
+
+function prepareClaudePrompt(){
+  const desc=document.getElementById('pDesc').value.trim();
+  if(!desc||desc.length<40){
+    alert('Please paste a project description first (at least a few sentences).');
+    return;
+  }
+  document.getElementById('claudeBox').style.display='block';
+  document.getElementById('continueAfterAI').style.display='inline-flex';
+  document.getElementById('claudeBox').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function copyClaudePrompt(){
+  const txt=buildClaudePrompt();
+  const fb=document.getElementById('copyFeedback');
+  const showOk=()=>{fb.classList.add('show');setTimeout(()=>fb.classList.remove('show'),2400);};
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(showOk).catch(()=>fallbackCopy(txt,showOk));
+  }else{
+    fallbackCopy(txt,showOk);
+  }
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity=0;
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');cb();}catch(e){alert('Could not copy automatically. Please select and copy the prompt manually.');}
+  document.body.removeChild(ta);
+}
+
+// ── FILLABLE TEMPLATES ─────────────────────────────────────────────────
+function todayISO(){const d=new Date();return d.toISOString().slice(0,10);}
+function thisMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
+
+const TMPL_META={
+  proj:{title:'Project Description',sub:'Lag (2023:747) §3–5 · Prop. 2013/14:1 s.521–522'},
+  time:{title:'Monthly Time Log (per person)',sub:'Lag (2023:747) §5 · ≥50% of working time AND ≥15 hours/month'},
+  ppl:{title:'Qualifying People Register',sub:'Lag (2023:747) §5 (employees) · §6 (consultants)'},
+  agi:{title:'AGI Monthly Claim Summary',sub:'Lag (2023:747) §7 · No carry-forward'}
+};
+
+function openTmpl(key){
+  document.getElementById('tmHead').textContent=TMPL_META[key].title;
+  document.getElementById('tmSub').textContent=TMPL_META[key].sub;
+  document.getElementById('tmBody').innerHTML=renderTmpl(key);
+  document.getElementById('tmplModal').classList.add('open');
+  if(key==='time')bindTimeRowEvents();
+}
+function closeTmpl(){document.getElementById('tmplModal').classList.remove('open');}
+
+function renderTmpl(key){
+  if(key==='proj')return renderProjTmpl();
+  if(key==='time')return renderTimeTmpl();
+  if(key==='ppl')return renderPplTmpl();
+  if(key==='agi')return renderAgiTmpl();
+  return '';
+}
+
+// ─── PROJECT DESCRIPTION TEMPLATE ───
+function renderProjTmpl(){
+  return `<div class="preview-banner">All fields save into a clean PDF you can hand to Skatteverket or your tax advisor. Leave anything blank that does not apply.</div>
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Project identification</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Project name</label><input type="text" id="t_proj_name" placeholder="e.g. AI Churn Prediction Engine"/></div>
+      <div class="mfld"><label>Project ID / code</label><input type="text" id="t_proj_id" placeholder="Optional internal ID"/></div>
+    </div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Start date</label><input type="month" id="t_proj_start"/></div>
+      <div class="mfld"><label>End date (leave blank if ongoing)</label><input type="month" id="t_proj_end"/></div>
+    </div>
+    <div class="mfld"><label>Project lead / responsible person</label><input type="text" id="t_proj_lead"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Gate 1 — Commercial purpose <span class="mfld-law">§3</span></div>
+    <div class="mfld"><label>How does this project serve a commercial purpose?</label>
+      <textarea id="t_proj_g1" rows="3" placeholder="Describe how the work is conducted within näringsverksamhet, and how results will create commercial value (revenue, cost saving, competitive position...)"></textarea>
+      <div class="mfld-help">Internal research for your own products counts. Pure academic work without commercial application does not.</div>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Gate 2 — Systematic methodology <span class="mfld-law">§4</span></div>
+    <div class="mfld"><label>What systematic methodology do you follow?</label>
+      <textarea id="t_proj_g2" rows="3" placeholder="e.g. Hypothesis-driven: (1) problem formulation, (2) literature review, (3) experimental implementation, (4) benchmark evaluation, (5) iteration..."></textarea>
+      <div class="mfld-help">Ad-hoc fixes or routine iteration do not qualify. Show structure.</div>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Gate 3 — New knowledge or substantially new product <span class="mfld-law">§4</span></div>
+    <div class="mfld"><label>What is novel about this work?</label>
+      <textarea id="t_proj_g3" rows="3" placeholder="Describe the new knowledge created, or the substantially new/improved product or process. What does not exist in prior art?"></textarea>
+    </div>
+    <div class="mfld"><label>What prior research forms the decisive foundation?</label>
+      <textarea id="t_proj_research" rows="3" placeholder="Cite the research, papers, or external knowledge that this work builds on. The research result must be a decisive prerequisite, not just inspiration."></textarea>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Exclusion check <span class="mfld-law">Prop. 2013/14:1</span></div>
+    <div class="mfld"><label>Confirm exclusions (routine dev, maintenance, support, ops, sales, HR are excluded)</label>
+      <textarea id="t_proj_excl" rows="2" placeholder="Confirm that no routine maintenance, support, project management, or ancillary functions are included in the qualifying scope."></textarea>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Sign-off</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Prepared by</label><input type="text" id="t_proj_prep" placeholder="Name and role"/></div>
+      <div class="mfld"><label>Date</label><input type="date" id="t_proj_prep_date" value="${todayISO()}"/></div>
+    </div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Approved by</label><input type="text" id="t_proj_app" placeholder="Manager / CFO"/></div>
+      <div class="mfld"><label>Date</label><input type="date" id="t_proj_app_date"/></div>
+    </div>
+  </div>
+
+  <div class="macts">
+    <button class="btn btn-dark" onclick="genTmplPDF('proj')">↓ Generate PDF</button>
+    <button class="btn btn-out" onclick="closeTmpl()">Cancel</button>
+  </div>`;
+}
+
+// ─── TIME LOG TEMPLATE ───
+function renderTimeTmpl(){
+  return `<div class="preview-banner">⚠ §5 requires <strong>both</strong> conditions in the same month: at least 50% of working time AND at least 15 hours on R&D. Enter actual hours, not estimates.</div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Person and period</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Full name</label><input type="text" id="t_time_name"/></div>
+      <div class="mfld"><label>Personal ID (personnummer)</label><input type="text" id="t_time_pid" placeholder="YYYYMMDD-XXXX"/></div>
+    </div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Role / title</label><input type="text" id="t_time_role"/></div>
+      <div class="mfld"><label>Employment type</label>
+        <select id="t_time_type">
+          <option value="Employee (§5)">Employee (§5)</option>
+          <option value="Consultant, natural person (§6)">Consultant, natural person (§6)</option>
+        </select>
+      </div>
+    </div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Month</label><input type="month" id="t_time_month" value="${thisMonth()}"/></div>
+      <div class="mfld"><label>Project name</label><input type="text" id="t_time_project"/></div>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Weekly hours</div>
+    <div class="time-grid">
+      <label>Week</label>
+      <label>R&amp;D hours</label>
+      <label>Other hours</label>
+      <label>Total</label>
+      <label>R&amp;D %</label>
+      ${[1,2,3,4,5].map(w=>`
+        <span class="week-l">W${w}</span>
+        <input type="number" min="0" step="0.5" class="t_rd" data-w="${w}" oninput="recalcTime()"/>
+        <input type="number" min="0" step="0.5" class="t_other" data-w="${w}" oninput="recalcTime()"/>
+        <input type="number" class="t_total" data-w="${w}" readonly style="background:var(--subtle);opacity:.7"/>
+        <input type="text" class="t_pct" data-w="${w}" readonly style="background:var(--subtle);opacity:.7"/>
+      `).join('')}
+    </div>
+    <div class="time-total">
+      <span>Total R&amp;D this month: <strong id="time_rd_sum">0</strong>h, total hours: <strong id="time_all_sum">0</strong>h</span>
+      <span class="qual" id="time_qual">—</span>
+    </div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Qualifying calculation</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Monthly salary (kr)</label><input type="number" id="t_time_salary" placeholder="60000" oninput="recalcTime()"/></div>
+      <div class="mfld"><label>Qualifying salary (salary × R&amp;D %)</label><input type="text" id="t_time_qsal" readonly style="background:var(--subtle);opacity:.8"/></div>
+    </div>
+    <div class="mfld"><label>Estimated 20% deduction</label><input type="text" id="t_time_ded" readonly style="background:var(--subtle);opacity:.8"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Sign-off</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Employee / consultant signature (name)</label><input type="text" id="t_time_sig1"/></div>
+      <div class="mfld"><label>Date</label><input type="date" id="t_time_date1" value="${todayISO()}"/></div>
+    </div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Manager signature (name)</label><input type="text" id="t_time_sig2"/></div>
+      <div class="mfld"><label>Date</label><input type="date" id="t_time_date2"/></div>
+    </div>
+  </div>
+
+  <div class="macts">
+    <button class="btn btn-dark" onclick="genTmplPDF('time')">↓ Generate PDF</button>
+    <button class="btn btn-out" onclick="closeTmpl()">Cancel</button>
+  </div>`;
+}
+
+function bindTimeRowEvents(){recalcTime();}
+
+function recalcTime(){
+  let rdSum=0,otherSum=0;
+  document.querySelectorAll('.t_rd').forEach(rdInp=>{
+    const w=rdInp.dataset.w;
+    const rd=parseFloat(rdInp.value)||0;
+    const other=parseFloat(document.querySelector(`.t_other[data-w="${w}"]`).value)||0;
+    const total=rd+other;
+    const pct=total>0?Math.round(rd/total*100):0;
+    document.querySelector(`.t_total[data-w="${w}"]`).value=total||'';
+    document.querySelector(`.t_pct[data-w="${w}"]`).value=total>0?pct+'%':'';
+    rdSum+=rd;otherSum+=other;
+  });
+  const totalAll=rdSum+otherSum;
+  const pctMonth=totalAll>0?rdSum/totalAll*100:0;
+  document.getElementById('time_rd_sum').textContent=rdSum.toFixed(1);
+  document.getElementById('time_all_sum').textContent=totalAll.toFixed(1);
+  const q=document.getElementById('time_qual');
+  if(totalAll===0){q.textContent='—';q.className='qual';}
+  else if(pctMonth>=50 && rdSum>=15){q.textContent=`✓ Qualifies (${pctMonth.toFixed(0)}%, ${rdSum.toFixed(1)}h)`;q.className='qual pass';}
+  else{
+    const fail=[];
+    if(pctMonth<50)fail.push(`under 50% (${pctMonth.toFixed(0)}%)`);
+    if(rdSum<15)fail.push(`under 15h (${rdSum.toFixed(1)}h)`);
+    q.textContent=`✗ Does not qualify: ${fail.join(', ')}`;q.className='qual fail';
+  }
+  const sal=parseFloat(document.getElementById('t_time_salary').value)||0;
+  const qsal=Math.round(sal*pctMonth/100);
+  document.getElementById('t_time_qsal').value=qsal?fkr(qsal)+' kr':'';
+  document.getElementById('t_time_ded').value=qsal?fkr(qsal*0.20)+' kr':'';
+}
+
+// ─── PEOPLE REGISTER TEMPLATE ───
+let pplEmpRows=2, pplConRows=1;
+function renderPplTmpl(){
+  return `<div class="preview-banner">Add one row per person who qualifies this month. Click + Add row for more. Use the trash icon to remove.</div>
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Company and period</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Company name</label><input type="text" id="t_ppl_co"/></div>
+      <div class="mfld"><label>Org.nr</label><input type="text" id="t_ppl_org" placeholder="556XXX-XXXX"/></div>
+    </div>
+    <div class="mfld"><label>Month</label><input type="month" id="t_ppl_month" value="${thisMonth()}"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Employees <span class="mfld-law">§5</span></div>
+    <div class="row-list" id="emp_list">${renderPplRow('emp',0)}${renderPplRow('emp',1)}</div>
+    <button class="add-row" onclick="addPplRow('emp')">+ Add employee row</button>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Consultants (natural persons) <span class="mfld-law">§6</span></div>
+    <div class="row-list" id="con_list">${renderPplRow('con',0)}</div>
+    <button class="add-row" onclick="addPplRow('con')">+ Add consultant row</button>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Sign-off</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Prepared by</label><input type="text" id="t_ppl_prep"/></div>
+      <div class="mfld"><label>Approved by (CFO)</label><input type="text" id="t_ppl_cfo"/></div>
+    </div>
+  </div>
+
+  <div class="macts">
+    <button class="btn btn-dark" onclick="genTmplPDF('ppl')">↓ Generate PDF</button>
+    <button class="btn btn-out" onclick="closeTmpl()">Cancel</button>
+  </div>`;
+}
+function renderPplRow(kind,i){
+  const id=kind+'_'+i;
+  return `<div class="row-item" data-rowid="${id}">
+    <span class="idx">${i+1}</span>
+    <input type="text" placeholder="Name" data-f="name"/>
+    <input type="text" placeholder="Pers.ID" data-f="pid" class="col-hide"/>
+    <input type="text" placeholder="Role / project" data-f="role"/>
+    <input type="number" placeholder="Salary" data-f="salary"/>
+    <input type="number" placeholder="R&D %" data-f="pct" min="0" max="100"/>
+    <button class="rm" onclick="removePplRow('${kind}','${id}')" title="Remove">✕</button>
+  </div>`;
+}
+function addPplRow(kind){
+  const list=document.getElementById(kind+'_list');
+  const i=list.children.length;
+  list.insertAdjacentHTML('beforeend',renderPplRow(kind,i));
+}
+function removePplRow(kind,id){
+  const row=document.querySelector(`[data-rowid="${id}"]`);
+  if(row)row.remove();
+  // re-number
+  const list=document.getElementById(kind+'_list');
+  [...list.children].forEach((r,i)=>{r.querySelector('.idx').textContent=i+1;});
+}
+
+// ─── AGI CLAIM SUMMARY ───
+function renderAgiTmpl(){
+  return `<div class="preview-banner">⚠ Unused deductions <strong>cannot</strong> be carried forward (§7). File on AGI by the 12th of the following month.</div>
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Company and period</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Company name</label><input type="text" id="t_agi_co"/></div>
+      <div class="mfld"><label>Org.nr</label><input type="text" id="t_agi_org"/></div>
+    </div>
+    <div class="mfld"><label>Reporting month</label><input type="month" id="t_agi_month" value="${thisMonth()}"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Calculation</div>
+    <div class="mfld"><label>Total qualifying salary base (kr)</label>
+      <input type="number" id="t_agi_base" placeholder="Sum from People Register" oninput="recalcAgi()"/>
+      <div class="mfld-help">Sum of salary × R&D % for all qualifying persons this month.</div>
+    </div>
+    <div class="mfld"><label>Deduction (×20%)</label><input type="text" id="t_agi_ded" readonly style="background:var(--subtle);opacity:.85"/></div>
+    <div class="mfld"><label>Cap check (max 3 000 000 kr/month)</label><input type="text" id="t_agi_cap" readonly style="background:var(--subtle);opacity:.85"/></div>
+    <div class="mfld"><label>Final deduction claimed (kr)</label><input type="text" id="t_agi_final" readonly style="background:var(--subtle);opacity:.85"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Net contributions</div>
+    <div class="mfld"><label>Total monthly payroll (kr)</label>
+      <input type="number" id="t_agi_payroll" placeholder="All employees, all roles" oninput="recalcAgi()"/>
+    </div>
+    <div class="mfld"><label>Normal arbetsgivaravgifter (31.42%)</label><input type="text" id="t_agi_norm" readonly style="background:var(--subtle);opacity:.85"/></div>
+    <div class="mfld"><label>Net contributions payable</label><input type="text" id="t_agi_net" readonly style="background:var(--subtle);opacity:.85"/></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Pre-filing checks</div>
+    <div class="mfld"><label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)"><input type="checkbox" id="t_agi_c1"/> <span style="font-size:13px">Time logs complete for all qualifying persons</span></label></div>
+    <div class="mfld"><label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)"><input type="checkbox" id="t_agi_c2"/> <span style="font-size:13px">Project descriptions on file</span></label></div>
+    <div class="mfld"><label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)"><input type="checkbox" id="t_agi_c3"/> <span style="font-size:13px">People register updated</span></label></div>
+    <div class="mfld"><label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)"><input type="checkbox" id="t_agi_c4"/> <span style="font-size:13px">Consultants verified as natural persons (§6)</span></label></div>
+    <div class="mfld"><label style="display:flex;align-items:flex-start;gap:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)"><input type="checkbox" id="t_agi_c5"/> <span style="font-size:13px">Filed on AGI by the 12th of following month</span></label></div>
+  </div>
+
+  <div class="tmpl-section">
+    <div class="tmpl-section-title">Sign-off</div>
+    <div class="mfld-row">
+      <div class="mfld"><label>Prepared by</label><input type="text" id="t_agi_prep"/></div>
+      <div class="mfld"><label>Approved by</label><input type="text" id="t_agi_app"/></div>
+    </div>
+  </div>
+
+  <div class="macts">
+    <button class="btn btn-dark" onclick="genTmplPDF('agi')">↓ Generate PDF</button>
+    <button class="btn btn-out" onclick="closeTmpl()">Cancel</button>
+  </div>`;
+}
+function recalcAgi(){
+  const base=parseFloat(document.getElementById('t_agi_base').value)||0;
+  const ded=base*0.20;
+  const capped=Math.min(ded,CAP);
+  document.getElementById('t_agi_ded').value=ded?fkr(ded)+' kr':'';
+  document.getElementById('t_agi_cap').value=ded>CAP?'⚠ Capped at 3 MSEK':(ded?'Under cap ✓':'');
+  document.getElementById('t_agi_final').value=capped?fkr(capped)+' kr':'';
+  const pay=parseFloat(document.getElementById('t_agi_payroll').value)||0;
+  const norm=pay*RATE;
+  document.getElementById('t_agi_norm').value=norm?fkr(norm)+' kr':'';
+  document.getElementById('t_agi_net').value=(norm-capped)>0?fkr(norm-capped)+' kr':'';
+}
+
+// ─── PDF GENERATION FOR FILLABLE TEMPLATES ───
+function v(id){const el=document.getElementById(id);return el?(el.value||'').trim():'';}
+function vc(id){const el=document.getElementById(id);return el&&el.checked;}
+function fmtMonth(m){return m?new Date(m+'-01').toLocaleDateString('sv-SE',{year:'numeric',month:'long'}):'—';}
+function fmtDate(d){return d?new Date(d).toLocaleDateString('sv-SE'):'—';}
+function blankLine(x){return x||'<span style="color:#bbb">—</span>';}
+
+function pdfShell(title,subtitle,inner){
+  return `<!DOCTYPE html><html lang="sv"><head><meta charset="UTF-8"/><title>${esc(title)}</title>
+  <style>
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,sans-serif;color:#1A1814;background:#fff;margin:0;padding:32px 40px;font-size:13px;line-height:1.55}
+  h1{font-family:Georgia,serif;font-size:24px;font-weight:400;margin-bottom:4px}
+  .sub{font-size:11px;color:#888;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;border-bottom:2px solid #1A1814}
+  h2{font-family:Georgia,serif;font-size:16px;font-weight:400;margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid #ddd}
+  .row{display:grid;grid-template-columns:160px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid #f0f0f0}
+  .row .l{font-weight:600;color:#666;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+  .row .v{font-size:13.5px;color:#1A1814}
+  .block{margin:8px 0 14px}
+  .block .l{font-weight:600;color:#666;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+  .block .v{font-size:13px;color:#222;white-space:pre-wrap;background:#fafaf7;border-left:3px solid #C9990A;padding:10px 14px;border-radius:4px;min-height:24px}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:12.5px}
+  th{background:#1A1814;color:#fff;font-weight:600;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td{padding:8px 10px;border-bottom:1px solid #eee;vertical-align:top}
+  tr:nth-child(even) td{background:#fafaf7}
+  .totrow td{background:#FDF5E0!important;font-weight:600;border-top:2px solid #1A1814}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.04em}
+  .badge.g{background:#EAF4EE;color:#2A7A4F}
+  .badge.r{background:#FDF0EE;color:#C0392B}
+  .badge.y{background:#FDF5E0;color:#92650A}
+  .check{font-size:13px;margin:6px 0}
+  .check .b{display:inline-block;width:14px;height:14px;border:1.5px solid #1A1814;margin-right:8px;vertical-align:-2px;text-align:center;line-height:11px;font-size:11px;border-radius:2px}
+  .signrow{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:24px;padding-top:18px;border-top:1px solid #ddd}
+  .sigbox{font-size:12px}
+  .sigbox .sigl{font-weight:600;color:#666;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px}
+  .sigbox .signame{border-bottom:1px solid #888;padding-bottom:2px;min-height:22px;font-size:13.5px}
+  .sigbox .sigdate{margin-top:8px;font-size:11.5px;color:#888}
+  .foot{margin-top:36px;padding-top:14px;border-top:1px solid #ddd;font-size:10.5px;color:#aaa;line-height:1.7}
+  @media print{body{padding:18px 24px}.no-print{display:none}}
+  .print-bar{position:sticky;top:0;background:#1A1814;color:#fff;padding:10px 16px;margin:-32px -40px 24px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+  .print-bar button{background:#C9990A;color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px}
+  </style></head><body>
+  <div class="print-bar no-print"><span>${esc(title)} preview · use the button or File → Print to save as PDF</span><button onclick="window.print()">🖨 Print / Save as PDF</button></div>
+  <h1>${esc(title)}</h1>
+  <div class="sub">${esc(subtitle)}</div>
+  ${inner}
+  <div class="foot">
+    <strong style="color:#888">Legal basis:</strong> Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter. §3–5 (criteria), §6 (consultants), §7 (no carry-forward). Exclusions: Prop. 2013/14:1 s.521–522.<br/>
+    <strong style="color:#888">Disclaimer:</strong> Internal documentation for FoU-avdrag purposes. Consult a qualified Swedish tax advisor before filing.
+  </div>
+  </body></html>`;
+}
+
+function genTmplPDF(key){
+  let title=TMPL_META[key].title, subtitle=TMPL_META[key].sub, inner='';
+  if(key==='proj')inner=buildProjPDF();
+  else if(key==='time')inner=buildTimePDF();
+  else if(key==='ppl')inner=buildPplPDF();
+  else if(key==='agi')inner=buildAgiPDF();
+  const html=pdfShell(title,subtitle,inner);
+  const w=window.open('','_blank');w.document.write(html);w.document.close();w.focus();
+}
+
+function buildProjPDF(){
+  const start=v('t_proj_start'),end=v('t_proj_end');
+  const period=start?(fmtMonth(start)+(end?' → '+fmtMonth(end):' → ongoing')):'—';
+  return `
+  <h2>Project identification</h2>
+  <div class="row"><div class="l">Project name</div><div class="v">${blankLine(esc(v('t_proj_name')))}</div></div>
+  <div class="row"><div class="l">Project ID</div><div class="v">${blankLine(esc(v('t_proj_id')))}</div></div>
+  <div class="row"><div class="l">Period</div><div class="v">${period}</div></div>
+  <div class="row"><div class="l">Project lead</div><div class="v">${blankLine(esc(v('t_proj_lead')))}</div></div>
+
+  <h2>Gate 1 — Commercial purpose (§3)</h2>
+  <div class="block"><div class="v">${blankLine(esc(v('t_proj_g1')))}</div></div>
+
+  <h2>Gate 2 — Systematic methodology (§4)</h2>
+  <div class="block"><div class="v">${blankLine(esc(v('t_proj_g2')))}</div></div>
+
+  <h2>Gate 3 — New knowledge or substantially new product (§4)</h2>
+  <div class="block"><div class="l">Novelty</div><div class="v">${blankLine(esc(v('t_proj_g3')))}</div></div>
+  <div class="block"><div class="l">Prior research as decisive foundation</div><div class="v">${blankLine(esc(v('t_proj_research')))}</div></div>
+
+  <h2>Exclusion check (Prop. 2013/14:1)</h2>
+  <div class="block"><div class="v">${blankLine(esc(v('t_proj_excl')))}</div></div>
+
+  <div class="signrow">
+    <div class="sigbox"><div class="sigl">Prepared by</div><div class="signame">${blankLine(esc(v('t_proj_prep')))}</div><div class="sigdate">Date: ${fmtDate(v('t_proj_prep_date'))}</div></div>
+    <div class="sigbox"><div class="sigl">Approved by</div><div class="signame">${blankLine(esc(v('t_proj_app')))}</div><div class="sigdate">Date: ${fmtDate(v('t_proj_app_date'))}</div></div>
+  </div>`;
+}
+
+function buildTimePDF(){
+  let rows='';let rdSum=0,allSum=0;
+  for(let w=1;w<=5;w++){
+    const rd=parseFloat(document.querySelector(`.t_rd[data-w="${w}"]`).value)||0;
+    const oth=parseFloat(document.querySelector(`.t_other[data-w="${w}"]`).value)||0;
+    const tot=rd+oth;
+    const pct=tot>0?Math.round(rd/tot*100):0;
+    rdSum+=rd;allSum+=oth+rd;
+    if(rd||oth)rows+=`<tr><td>Week ${w}</td><td>${rd.toFixed(1)}</td><td>${oth.toFixed(1)}</td><td>${tot.toFixed(1)}</td><td>${tot>0?pct+'%':'—'}</td></tr>`;
+  }
+  const monthPct=allSum>0?(rdSum/allSum*100):0;
+  const qualifies=monthPct>=50 && rdSum>=15;
+  const badge=allSum===0?'<span class="badge y">No data</span>':qualifies?'<span class="badge g">✓ Qualifies (§5)</span>':'<span class="badge r">✗ Does not qualify</span>';
+  const sal=parseFloat(v('t_time_salary'))||0;
+  const qsal=sal*monthPct/100;
+  return `
+  <h2>Person and period</h2>
+  <div class="row"><div class="l">Name</div><div class="v">${blankLine(esc(v('t_time_name')))}</div></div>
+  <div class="row"><div class="l">Personal ID</div><div class="v">${blankLine(esc(v('t_time_pid')))}</div></div>
+  <div class="row"><div class="l">Role</div><div class="v">${blankLine(esc(v('t_time_role')))}</div></div>
+  <div class="row"><div class="l">Type</div><div class="v">${esc(v('t_time_type'))}</div></div>
+  <div class="row"><div class="l">Month</div><div class="v">${fmtMonth(v('t_time_month'))}</div></div>
+  <div class="row"><div class="l">Project</div><div class="v">${blankLine(esc(v('t_time_project')))}</div></div>
+
+  <h2>Weekly hours</h2>
+  <table><thead><tr><th>Week</th><th>R&amp;D hrs</th><th>Other hrs</th><th>Total</th><th>R&amp;D %</th></tr></thead>
+  <tbody>${rows||'<tr><td colspan="5" style="color:#bbb;font-style:italic">No hours entered</td></tr>'}
+  <tr class="totrow"><td>Month total</td><td>${rdSum.toFixed(1)}</td><td>${(allSum-rdSum).toFixed(1)}</td><td>${allSum.toFixed(1)}</td><td>${allSum>0?monthPct.toFixed(0)+'%':'—'}</td></tr>
+  </tbody></table>
+
+  <div style="margin-top:14px;padding:12px 14px;background:#fafaf7;border:1px solid #ddd;border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+    <div><strong>§5 qualification:</strong> requires ≥50% R&D <em>and</em> ≥15 hours/month</div>
+    <div>${badge}</div>
+  </div>
+
+  <h2>Qualifying calculation</h2>
+  <div class="row"><div class="l">Monthly salary</div><div class="v">${sal?fkr(sal)+' kr':'—'}</div></div>
+  <div class="row"><div class="l">Qualifying salary (salary × R&D%)</div><div class="v">${qsal?fkr(qsal)+' kr':'—'}</div></div>
+  <div class="row"><div class="l">Estimated 20% deduction</div><div class="v" style="color:#2A7A4F;font-weight:600">${qsal?fkr(qsal*0.20)+' kr':'—'}</div></div>
+
+  <div class="signrow">
+    <div class="sigbox"><div class="sigl">Employee / consultant</div><div class="signame">${blankLine(esc(v('t_time_sig1')))}</div><div class="sigdate">Date: ${fmtDate(v('t_time_date1'))}</div></div>
+    <div class="sigbox"><div class="sigl">Manager</div><div class="signame">${blankLine(esc(v('t_time_sig2')))}</div><div class="sigdate">Date: ${fmtDate(v('t_time_date2'))}</div></div>
+  </div>`;
+}
+
+function buildPplPDF(){
+  function rowsFor(kind){
+    const list=document.getElementById(kind+'_list');
+    if(!list)return{html:'',sum:0,empty:true};
+    const rows=[...list.children];
+    let html='',sum=0,empty=true,idx=1;
+    rows.forEach(r=>{
+      const get=f=>r.querySelector(`[data-f="${f}"]`).value.trim();
+      const name=get('name');if(!name)return;
+      empty=false;
+      const pid=get('pid'),role=get('role');
+      const salary=parseFloat(get('salary'))||0;
+      const pct=parseFloat(get('pct'))||0;
+      const ded=salary*(pct/100)*0.20;
+      sum+=ded;
+      html+=`<tr><td>${idx++}</td><td>${esc(name)}</td><td>${esc(pid)||'—'}</td><td>${esc(role)||'—'}</td><td>${salary?fkr(salary)+' kr':'—'}</td><td>${pct?pct+'%':'—'}</td><td><strong>${ded?fkr(ded)+' kr':'—'}</strong></td></tr>`;
+    });
+    return{html,sum,empty};
+  }
+  const emp=rowsFor('emp'),con=rowsFor('con');
+  const grand=emp.sum+con.sum;
+  return `
+  <h2>Company and period</h2>
+  <div class="row"><div class="l">Company</div><div class="v">${blankLine(esc(v('t_ppl_co')))}</div></div>
+  <div class="row"><div class="l">Org.nr</div><div class="v">${blankLine(esc(v('t_ppl_org')))}</div></div>
+  <div class="row"><div class="l">Month</div><div class="v">${fmtMonth(v('t_ppl_month'))}</div></div>
+
+  <h2>Employees (§5)</h2>
+  <table><thead><tr><th>#</th><th>Name</th><th>Pers.ID</th><th>Role / project</th><th>Salary</th><th>R&D%</th><th>Deduction</th></tr></thead>
+  <tbody>${emp.empty?'<tr><td colspan="7" style="color:#bbb;font-style:italic">No employees added</td></tr>':emp.html}
+  ${!emp.empty?`<tr class="totrow"><td colspan="6">Employee subtotal</td><td>${fkr(emp.sum)} kr</td></tr>`:''}
+  </tbody></table>
+
+  <h2>Consultants (§6 — natural persons)</h2>
+  <table><thead><tr><th>#</th><th>Name</th><th>Pers.ID</th><th>Role / project</th><th>Cost</th><th>R&D%</th><th>Deduction</th></tr></thead>
+  <tbody>${con.empty?'<tr><td colspan="7" style="color:#bbb;font-style:italic">No consultants added</td></tr>':con.html}
+  ${!con.empty?`<tr class="totrow"><td colspan="6">Consultant subtotal</td><td>${fkr(con.sum)} kr</td></tr>`:''}
+  </tbody></table>
+
+  <div style="margin-top:18px;padding:14px 18px;background:#FDF5E0;border:1px solid #E8C84A;border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+    <div><strong>Total deduction this month</strong></div>
+    <div style="font-family:Georgia,serif;font-size:22px;color:#92650A">${fkr(grand)} kr</div>
+  </div>
+  <div style="margin-top:10px;font-size:11.5px;color:#888">Cap check: ${grand>CAP?'⚠ Exceeds 3 MSEK monthly cap. Claim will be capped at 3 000 000 kr.':grand?'Under 3 MSEK monthly cap ✓':'—'}</div>
+
+  <div class="signrow">
+    <div class="sigbox"><div class="sigl">Prepared by</div><div class="signame">${blankLine(esc(v('t_ppl_prep')))}</div><div class="sigdate">Date: ${new Date().toLocaleDateString('sv-SE')}</div></div>
+    <div class="sigbox"><div class="sigl">CFO sign-off</div><div class="signame">${blankLine(esc(v('t_ppl_cfo')))}</div><div class="sigdate">Date: ___________</div></div>
+  </div>`;
+}
+
+function buildAgiPDF(){
+  const base=parseFloat(v('t_agi_base'))||0;
+  const ded=base*0.20;
+  const final=Math.min(ded,CAP);
+  const pay=parseFloat(v('t_agi_payroll'))||0;
+  const norm=pay*RATE;
+  const net=norm-final;
+  const ck=(id,lbl)=>`<div class="check"><span class="b">${vc(id)?'✓':''}</span>${lbl}</div>`;
+  return `
+  <h2>Company and period</h2>
+  <div class="row"><div class="l">Company</div><div class="v">${blankLine(esc(v('t_agi_co')))}</div></div>
+  <div class="row"><div class="l">Org.nr</div><div class="v">${blankLine(esc(v('t_agi_org')))}</div></div>
+  <div class="row"><div class="l">Reporting month</div><div class="v">${fmtMonth(v('t_agi_month'))}</div></div>
+
+  <h2>Deduction calculation (§4, §7)</h2>
+  <table>
+  <tbody>
+  <tr><td style="width:60%">Total qualifying salary base</td><td style="text-align:right;font-weight:600">${base?fkr(base)+' kr':'—'}</td></tr>
+  <tr><td>Deduction (×20%)</td><td style="text-align:right;font-weight:600;color:#2A7A4F">−${ded?fkr(ded)+' kr':'—'}</td></tr>
+  <tr><td>Cap check (max 3 000 000 kr)</td><td style="text-align:right">${ded>CAP?'<span class="badge r">Capped</span>':ded?'<span class="badge g">Under cap</span>':'—'}</td></tr>
+  <tr class="totrow"><td><strong>Final deduction claimed</strong></td><td style="text-align:right;font-family:Georgia,serif;font-size:18px;color:#2A7A4F">${final?fkr(final)+' kr':'—'}</td></tr>
+  </tbody></table>
+
+  <h2>Net contributions</h2>
+  <table><tbody>
+  <tr><td style="width:60%">Total monthly payroll</td><td style="text-align:right">${pay?fkr(pay)+' kr':'—'}</td></tr>
+  <tr><td>Normal arbetsgivaravgifter (31.42%)</td><td style="text-align:right">${norm?fkr(norm)+' kr':'—'}</td></tr>
+  <tr><td>Less: FoU deduction</td><td style="text-align:right;color:#2A7A4F">−${final?fkr(final)+' kr':'—'}</td></tr>
+  <tr class="totrow"><td><strong>Net contributions payable</strong></td><td style="text-align:right;font-family:Georgia,serif;font-size:18px">${net>0?fkr(net)+' kr':'—'}</td></tr>
+  </tbody></table>
+
+  <h2>Pre-filing checks</h2>
+  ${ck('t_agi_c1','Time logs complete for all qualifying persons')}
+  ${ck('t_agi_c2','Project descriptions on file')}
+  ${ck('t_agi_c3','People register updated')}
+  ${ck('t_agi_c4','Consultants verified as natural persons (§6)')}
+  ${ck('t_agi_c5','Filed on AGI by the 12th of the following month')}
+
+  <div style="margin-top:18px;padding:12px 14px;background:#FDF0EE;border:1px solid #f5c6c1;border-radius:6px;font-size:12px;color:#7d2a20"><strong>⚠ Important:</strong> Unused deductions cannot be carried forward (§7). If you do not claim this month, the saving is permanently lost.</div>
+
+  <div class="signrow">
+    <div class="sigbox"><div class="sigl">Prepared by</div><div class="signame">${blankLine(esc(v('t_agi_prep')))}</div><div class="sigdate">Date: ${new Date().toLocaleDateString('sv-SE')}</div></div>
+    <div class="sigbox"><div class="sigl">Approved by</div><div class="signame">${blankLine(esc(v('t_agi_app')))}</div><div class="sigdate">Date: ___________</div></div>
+  </div>`;
+}
+</script>
+</body>
+</html>
