@@ -1,5 +1,10 @@
 # FoU-avdrag Portal
 
+Build description (new nav item, new dark section)
+Paste anything — Jira epics, TG GO notes, bullet points, emails. The AI writes formal Gate 1, Gate 2 and Gate 3 text in Swedish, ready for your tracker and Word document. Each gate has a Copy button. There's also a "→ Copy to Assess project" button that pre-fills the existing assessment flow.
+Export row to tracker (appears after any AI analysis)
+After either the Assess or Build flow produces a result, an "↓ Export row to tracker" button appears. It downloads a .csv file with one pre-filled row — FoU Code, name, gate scores, descriptions — that you open in Excel and paste straight into Tab 1 of the tracker.
+
 A single-file web portal for assessing R&D projects against Swedish employer contribution deduction criteria under **Lag (2023:747) om särskilt avdrag vid beräkning av arbetsgivaravgifter** — the "lag om FoU-avdrag".
 
 Cut employer social contributions from **31.42% → 11.42%** for qualifying R&D staff. That's roughly 10 000 kr saved per person per month at a 60 000 kr salary.
